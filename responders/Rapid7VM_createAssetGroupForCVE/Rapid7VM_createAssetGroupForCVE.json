@@ -1,0 +1,59 @@
+{
+    "name": "Rapid7VMCreateAssetGroup",
+    "version": "1.0.0",
+    "author": "John Requejo",
+    "url": "https://johnrequejo.com",
+    "license": "AGPL-v3",
+    "description": "Creates a new asset group on your Rapid7VM instance and add the assets obtained from Rapid7VMGetAssetList analyzer.",
+    "dataTypeList": ["thehive:case_artifact", "thehive:case"],
+    "baseConfig": "Rapid7VMCreateAssetGroup",
+    "command": "Rapid7VM_createAssetGroupForCVE/Rapid7VM_createAssetGroupForCVE.py",
+    "configurationItems": [
+      {
+        "name": "userName",
+        "description": "User name for your Rapid7 VM Instance.",
+        "type": "string",
+        "multi": false,
+        "required": true
+      },
+      {
+        "name": "password",
+        "description": "Password for your Rapid7 VM Instance.",
+        "type": "string",
+        "multi": false,
+        "required": true
+      },
+      {
+        "name": "instanceURL",
+        "description": "URL for your Rapid7 VM Instance.",
+        "type": "string",
+        "multi": false,
+        "required": true
+      },
+      {
+        "name": "verifyCertificate",
+        "description": "False if the certificate used set in your Rapid7 VM Instance is a self-signed one.",
+        "type": "boolean",
+        "multi": false,
+        "required": false,
+        "defaultValue": false
+      },
+      {
+        "name": "thehiveInstance",
+        "description": "URL for thehive instance.",
+        "type": "string",
+        "multi": false,
+        "required": true
+      },
+      {
+        "name": "thehiveApiKey",
+        "description": "Api-Key for your thehive Instance.",
+        "type": "string",
+        "multi": false,
+        "required": true
+      }
+    ],
+    "config": {
+        "auto_extract": true 
+    }
+}
