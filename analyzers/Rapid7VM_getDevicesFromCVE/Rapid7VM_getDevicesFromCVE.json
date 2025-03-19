@@ -1,0 +1,45 @@
+{
+    "name": "Rapid7VMGetDeviceList",
+    "version": "1.0",
+    "author": "John Requejo",
+    "url": "https://johnrequejo.com",
+    "license": "AGPL-v3",
+    "description": "Retrieve a list of assets that are vulnerable to the observable cve.",
+    "dataTypeList": ["cve"],
+    "baseConfig": "Rapid7VMGetDeviceList",
+    "command": "Rapid7VM_getDevicesFromCVE/Rapid7VM_getDevicesFromCVE.py",
+    "configurationItems": [
+      {
+        "name": "userName",
+        "description": "User name for your Rapid7 VM Instance.",
+        "type": "string",
+        "multi": false,
+        "required": true
+      },
+      {
+        "name": "password",
+        "description": "Password for your Rapid7 VM Instance.",
+        "type": "string",
+        "multi": false,
+        "required": true
+      },
+      {
+        "name": "instanceURL",
+        "description": "URL for your Rapid7 VM Instance.",
+        "type": "string",
+        "multi": false,
+        "required": true
+      },
+      {
+        "name": "verifyCertificate",
+        "description": "False if the certificate used set in your Rapid7 VM Instance is a self-signed one.",
+        "type": "boolean",
+        "multi": false,
+        "required": false,
+        "defaultValue": false
+      }
+    ],
+    "config": {
+        "auto_extract": false 
+    }
+}
