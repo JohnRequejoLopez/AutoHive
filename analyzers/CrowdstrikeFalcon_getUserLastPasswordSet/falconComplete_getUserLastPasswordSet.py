@@ -16,7 +16,7 @@ class crowdstrikeAnalyzer(Analyzer):
         self.__crwdConn = None
 
     def run(self):
-        from crwd import CrowdStrikeModule
+        from .crwd import CrowdStrikeModule
 
         try:
             if self.data_type == "username":
