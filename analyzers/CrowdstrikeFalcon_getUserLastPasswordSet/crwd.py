@@ -3,7 +3,7 @@ from falconpy import (
     RealTimeResponse
 )
 
-from varTypes import (
+from .varTypes import (
     FalconResponse,
     DeviceInfo
 )
