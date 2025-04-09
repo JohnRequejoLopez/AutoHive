@@ -3,7 +3,8 @@ from varTypes import (
     CVEAssetsResponse,
     AssetGroupResponse,
     AssetVulnerabilitiesResponse,
-    AllAssetsResponse
+    AllAssetsResponse,
+    VulnerabilityInfo
 )
 from typing import (
     List
