@@ -63,8 +63,8 @@ class testCrowdstrikeAnalyzer(unittest.TestCase):
         })
 
     @patch('analyzers.CrowdstrikeFalcon_getUserLastPasswordSet.crwd.CrowdStrikeModule')
-    @patch('sys.stdin', new_callable=patch.stdin)
-    def test_run_error(self, MockCrowdStrikeModule):
+    @patch('sys.stdin', new_callable=mock_open)
+    def test_run_error(self, MockCrowdStrikeModule, mock_stdin):
         """
         Test case to simulate an error during the execution of the 'crowdstrikeAnalyzer'.
         This test mocks the 'CrowdStrikeModule' and ensures that the 'unexpectedError' function is called
