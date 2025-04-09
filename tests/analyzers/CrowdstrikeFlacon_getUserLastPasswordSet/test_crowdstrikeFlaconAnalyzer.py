@@ -1,6 +1,7 @@
 import unittest
 from unittest.mock import patch, MagicMock
-from analyzers.CrowdstrikeFlacon_getUserLastPasswordSet.falconComplete_getUserLastPasswordSet import crowdstrikeAnalyzer
+from analyzers.CrowdstrikeFalcon_getUserLastPasswordSet.falconComplete_getUserLastPasswordSet import crowdstrikeAnalyzer
+
 
 class testCrowdstrikeAnalyzer(unittest.TestCase):
     
