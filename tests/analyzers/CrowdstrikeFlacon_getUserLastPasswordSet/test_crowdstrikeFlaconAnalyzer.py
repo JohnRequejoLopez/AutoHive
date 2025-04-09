@@ -6,12 +6,26 @@ from analyzers.CrowdstrikeFalcon_getUserLastPasswordSet.falconComplete_getUserLa
 class testCrowdstrikeAnalyzer(unittest.TestCase):
     
     @patch('analyzers.CrowdstrikeFalcon_getUserLastPasswordSet.crwd.CrowdStrikeModule')
+    @patch('sys.stdin', new_callable=patch.stdin)
     def test_run_successful(self, MockCrowdStrikeModule):
         """
         Test case to simulate a successful run of the 'crowdstrikeAnalyzer'.
         This test mocks the 'CrowdStrikeModule' and verifies that the 'report' function is called
         with the expected result when the analyzer completes successfully.
         """
+        import json 
+        
+        input_data = {
+            "config": {
+                "clientId": "dummy_clientId",
+                "clientSecret": "dummy_clientSecret",
+                "targetHostName": "hostname1",
+                "outputFile": "C:\\\\tmp\\\\file.txt"
+            },
+            "data": "testuser"
+        }
+        mock_stdin.write(json.dumps(input_data))
+        mock_stdin.seek(0)
         # Create an instance of the analyzer
         analyzer = crowdstrikeAnalyzer()
 
@@ -49,6 +63,7 @@ class testCrowdstrikeAnalyzer(unittest.TestCase):
         })
 
     @patch('analyzers.CrowdstrikeFalcon_getUserLastPasswordSet.crwd.CrowdStrikeModule')
+    @patch('sys.stdin', new_callable=patch.stdin)
     def test_run_error(self, MockCrowdStrikeModule):
         """
         Test case to simulate an error during the execution of the 'crowdstrikeAnalyzer'.
