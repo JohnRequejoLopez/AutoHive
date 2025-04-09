@@ -5,6 +5,9 @@ from varTypes import (
     AssetVulnerabilitiesResponse,
     AllAssetsResponse
 )
+from typing import (
+    List
+)
 
 class vulnerabilityManagement:
     def __init__(self, url: str, username: str, password: str) -> None:
