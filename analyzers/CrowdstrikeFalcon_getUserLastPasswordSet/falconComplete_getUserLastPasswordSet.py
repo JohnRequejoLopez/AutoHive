@@ -52,6 +52,7 @@ class crowdstrikeAnalyzer(Analyzer):
             self.unexpectedError(e)
 
     def summary(self, raw):
+        taxonomies = []
         raw = raw['summary']
 
         taxonomies.append(
