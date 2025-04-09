@@ -51,7 +51,7 @@ jobs:
       run: |
         # Run pytest and specify the directory or file to search for tests
         # Assuming tests are under the 'tests' directory or similar
-        python -m pytest tests/ --verbose --junit-xml=junit.xml
+        python -m pytest -s tests/ --verbose --junit-xml=junit.xml
 
     # Step 6: Publish Test Report
     - name: Publish Test Report
