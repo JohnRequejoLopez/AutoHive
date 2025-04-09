@@ -5,7 +5,7 @@ from analyzers.CrowdstrikeFalcon_getUserLastPasswordSet.falconComplete_getUserLa
 
 class testCrowdstrikeAnalyzer(unittest.TestCase):
     
-    @patch('analyzers.CrowdstrikeFalcon_getUserLastPasswordSet.falconComplete_getUserLastPasswordSet.CrowdStrikeModule')
+    @patch('analyzers.CrowdstrikeFalcon_getUserLastPasswordSet.crwd.CrowdStrikeModule')
     def test_run_successful(self, MockCrowdStrikeModule):
         """
         Test case to simulate a successful run of the 'crowdstrikeAnalyzer'.
@@ -48,7 +48,7 @@ class testCrowdstrikeAnalyzer(unittest.TestCase):
             }
         })
 
-    @patch('analyzers.CrowdstrikeFalcon_getUserLastPasswordSet.falconComplete_getUserLastPasswordSet.CrowdStrikeModule')
+    @patch('analyzers.CrowdstrikeFalcon_getUserLastPasswordSet.crwd.CrowdStrikeModule')
     def test_run_error(self, MockCrowdStrikeModule):
         """
         Test case to simulate an error during the execution of the 'crowdstrikeAnalyzer'.
