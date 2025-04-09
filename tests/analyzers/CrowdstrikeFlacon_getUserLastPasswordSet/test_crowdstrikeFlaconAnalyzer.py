@@ -1,12 +1,12 @@
 import unittest
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch, MagicMock, mock_open
 from analyzers.CrowdstrikeFalcon_getUserLastPasswordSet.falconComplete_getUserLastPasswordSet import crowdstrikeAnalyzer
 
 
 class testCrowdstrikeAnalyzer(unittest.TestCase):
     
     @patch('analyzers.CrowdstrikeFalcon_getUserLastPasswordSet.crwd.CrowdStrikeModule')
-    @patch('sys.stdin', new_callable=patch.mock_open)
+    @patch('sys.stdin', new_callable=mock_open)
     def test_run_successful(self, MockCrowdStrikeModule, mock_stdin):
         """
         Test case to simulate a successful run of the 'crowdstrikeAnalyzer'.
