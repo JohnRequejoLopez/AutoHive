@@ -29,7 +29,7 @@ class testCrowdstrikeAnalyzer(unittest.TestCase):
 
         # Mock the methods of the CrowdStrikeModule to simulate a successful API call
         mock_instance.runCloudScript.return_value = None  # Simulating a successful cloud script run
-        mock_instance.getFileContent.return_value = ('password_last_set_date', '')  # Simulating file content
+        mock_instance.getFileContent.return_value = ('{"password_last_set": "2025-04-09"}', '')  # Simulating JSON content
         mock_instance.deleteTmpFile.return_value = None  # Simulating file deletion
         mock_instance.close_rtr_session.return_value = None  # Simulating session close
 
