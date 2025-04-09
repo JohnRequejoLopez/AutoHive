@@ -7,14 +7,14 @@ class testCrowdstrikeAnalyzer(unittest.TestCase):
     
     @patch('analyzers.CrowdstrikeFalcon_getUserLastPasswordSet.crwd.CrowdStrikeModule')
     @patch('sys.stdin', new_callable=patch.stdin)
-    def test_run_successful(self, MockCrowdStrikeModule):
+    def test_run_successful(self, MockCrowdStrikeModule, mock_stdin):
         """
         Test case to simulate a successful run of the 'crowdstrikeAnalyzer'.
         This test mocks the 'CrowdStrikeModule' and verifies that the 'report' function is called
         with the expected result when the analyzer completes successfully.
         """
         import json 
-        
+
         input_data = {
             "config": {
                 "clientId": "dummy_clientId",
