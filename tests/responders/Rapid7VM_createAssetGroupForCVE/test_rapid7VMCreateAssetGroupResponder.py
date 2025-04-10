@@ -69,7 +69,10 @@ class TestRapid7Responder(unittest.TestCase):
                 "thehiveInstance": "https://thehive.local",
                 "thehiveApiKey": "dummy_apiKey"
             },
-            "data": "CVE-2025-TEST",
+            "data": {
+                "data": "123",
+                "dataType": "ip"
+            },
             "dataType": "ip",
             "_id": "observable123"
         }
@@ -85,7 +88,10 @@ class TestRapid7Responder(unittest.TestCase):
             'config.instanceURL': 'https://rapid7.local',
             'config.thehiveInstance': 'https://thehive.local',
             'config.thehiveApiKey': 'dummy_apiKey',
-            'data': 'CVE-2025-TEST',
+            "data": {
+                "data": "123",
+                "dataType": "ip"
+            },
             'dataType': 'ip',
             '_id': 'observable123'
         }[x])
