@@ -52,8 +52,8 @@ class rapid7VMResponder(Responder):
                     if observable.get('dataType') == 'cve':
                         cve = groupName = observable.get('data')
                         observableId = observable.get('_id')
-                    else:
-                        return self.error("No CVE observable type was found on this case.")
+                else:
+                    return self.error("No CVE observable type was found on this case.")
 
             if not cve:
                 return self.error("No CVE observable type was found in the case.")
