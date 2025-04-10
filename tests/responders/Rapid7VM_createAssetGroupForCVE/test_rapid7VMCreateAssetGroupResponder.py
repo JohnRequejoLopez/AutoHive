@@ -112,7 +112,7 @@ class TestRapid7Responder(unittest.TestCase):
         responder.error = MagicMock()
         responder.run()
 
-        responder.error.assert_called_once_with("No CVE observable type was found in the case.")
+        responder.error.assert_called_once_with("No CVE observable type was found on this case.")
 
 if __name__ == '__main__':
     unittest.main()
