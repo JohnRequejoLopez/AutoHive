@@ -17,6 +17,7 @@ class crowdstrikeAnalyzer(Analyzer):
 
     def run(self):
         from .crwd import CrowdStrikeModule
+        import json
 
         try:
             if self.data_type == "username":
