@@ -36,7 +36,7 @@ jobs:
         pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         if [ -f analyzers/CrowdstrikeFalcon_getUserLastPasswordSet/requirements.txt ]; then pip install -r analyzers/CrowdstrikeFalcon_getUserLastPasswordSet/requirements.txt; fi
-
+        if [ -f analyzers/Rapid7VM_getDevicesFromCVE/requirements.txt ]; then pip install -r analyzers/Rapid7VM_getDevicesFromCVE/requirements.txt; fi
 
     # Step 4: Lint with flake8
     - name: Lint with flake8
