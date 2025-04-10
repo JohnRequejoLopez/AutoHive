@@ -17,7 +17,8 @@ class testCrowdstrikeAnalyzer(unittest.TestCase):
                 "targetHostName": "hostname1",
                 "outputFile": "C:\\\\tmp\\\\file.txt"
             },
-            "data": "testuser"
+            "data": "testuser",
+            "dataType": "username" 
         }
 
         # Simula stdin con isatty y read()
@@ -63,7 +64,8 @@ class testCrowdstrikeAnalyzer(unittest.TestCase):
                 "targetHostName": "hostname2",
                 "outputFile": "C:\\\\tmp\\\\file.txt"
             },
-            "data": "testuser"
+            "data": "testuser",
+            "dataType": "username" 
         }
 
         mock_stdin.isatty.return_value = False
