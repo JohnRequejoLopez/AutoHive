@@ -82,7 +82,7 @@ class TestRapid7Responder(unittest.TestCase):
                 "dataType": "ip",
                 "_id": "observable123"
             },
-            "dataType": ip",
+            "dataType": "ip",
             "_id": "observable123"
         }
 
