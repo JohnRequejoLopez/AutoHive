@@ -6,14 +6,9 @@ from analyzers.CrowdstrikeFalcon_getUserLastPasswordSet.falconComplete_getUserLa
 class testCrowdstrikeAnalyzer(unittest.TestCase):
     
     @patch('analyzers.CrowdstrikeFalcon_getUserLastPasswordSet.crwd.CrowdStrikeModule')
-    @patch('sys.stdin', new_callable=mock_open)
-    def test_run_successful(self, MockCrowdStrikeModule, mock_stdin):
-        """
-        Test case to simulate a successful run of the 'crowdstrikeAnalyzer'.
-        This test mocks the 'CrowdStrikeModule' and verifies that the 'report' function is called
-        with the expected result when the analyzer completes successfully.
-        """
-        import json 
+    @patch('sys.stdin')
+    def test_run_successful(self, mock_stdin, MockCrowdStrikeModule):
+        import json
 
         input_data = {
             "config": {
@@ -24,79 +19,75 @@ class testCrowdstrikeAnalyzer(unittest.TestCase):
             },
             "data": "testuser"
         }
-        mock_stdin.write(json.dumps(input_data))
-        mock_stdin.seek(0)
-        # Create an instance of the analyzer
+
+        # Simula stdin con isatty y read()
+        mock_stdin.isatty.return_value = False
+        mock_stdin.read.return_value = json.dumps(input_data)
+
         analyzer = crowdstrikeAnalyzer()
 
-        # Simulate the input parameters using MagicMock to mock the get_param method
         analyzer.get_param = MagicMock(side_effect=lambda x, *_: {
-            'config.clientId': 'dummy_clientId',       # Simulating the clientId parameter
-            'config.clientSecret': 'dummy_clientSecret', # Simulating the clientSecret parameter
-            'config.targetHostName': 'hostname1',   # Simulating the target hostname
-            'config.outputFile': 'C:\\\\tmp\\\\file.txt',  # Simulating the output file path
-            'data': 'testuser'  # Simulating the username that will be analyzed
+            'config.clientId': 'dummy_clientId',
+            'config.clientSecret': 'dummy_clientSecret',
+            'config.targetHostName': 'hostname1',
+            'config.outputFile': 'C:\\\\tmp\\\\file.txt',
+            'data': 'testuser'
         }[x])
 
-        # Create a mock instance of the 'CrowdStrikeModule' to simulate interactions with the API
         mock_instance = MockCrowdStrikeModule.return_value
+        mock_instance.runCloudScript.return_value = None
+        mock_instance.getFileContent.return_value = ('{"password_last_set": "2025-04-09"}', '')
+        mock_instance.deleteTmpFile.return_value = None
+        mock_instance.close_rtr_session.return_value = None
 
-        # Mock the methods of the CrowdStrikeModule to simulate a successful API call
-        mock_instance.runCloudScript.return_value = None  # Simulating a successful cloud script run
-        mock_instance.getFileContent.return_value = ('{"password_last_set": "2025-04-09"}', '')  # Simulating JSON content
-        mock_instance.deleteTmpFile.return_value = None  # Simulating file deletion
-        mock_instance.close_rtr_session.return_value = None  # Simulating session close
-
-        # Mock the 'report' function to verify it gets called with the expected data
         analyzer.report = MagicMock()
-
-        # Set the 'data_type' to 'username' and run the analyzer
         analyzer.data_type = "username"
         analyzer.run()
 
-        # Verify that the 'report' method was called once with the expected parameters
         analyzer.report.assert_called_once_with({
             'summary': {
                 'username': 'testuser',
-                'LastPasswordSet': 'password_last_set_date'
+                'LastPasswordSet': '2025-04-09'
             }
         })
 
     @patch('analyzers.CrowdstrikeFalcon_getUserLastPasswordSet.crwd.CrowdStrikeModule')
-    @patch('sys.stdin', new_callable=mock_open)
-    def test_run_error(self, MockCrowdStrikeModule, mock_stdin):
-        """
-        Test case to simulate an error during the execution of the 'crowdstrikeAnalyzer'.
-        This test mocks the 'CrowdStrikeModule' and ensures that the 'unexpectedError' function is called
-        when an exception is raised during the run.
-        """
-        # Create an instance of the analyzer
+    @patch('sys.stdin')
+    def test_run_error(self, mock_stdin, MockCrowdStrikeModule):
+        import json
+
+        input_data = {
+            "config": {
+                "clientId": "dummy_clientId",
+                "clientSecret": "dummy_clientSecret",
+                "targetHostName": "hostname2",
+                "outputFile": "C:\\\\tmp\\\\file.txt"
+            },
+            "data": "testuser"
+        }
+
+        mock_stdin.isatty.return_value = False
+        mock_stdin.read.return_value = json.dumps(input_data)
+
         analyzer = crowdstrikeAnalyzer()
 
-        # Simulate the input parameters using MagicMock to mock the get_param method
         analyzer.get_param = MagicMock(side_effect=lambda x, *_: {
-            'config.clientId': 'dummy_clientId',       # Simulating the clientId parameter
-            'config.clientSecret': 'dummy_clientSecret', # Simulating the clientSecret parameter
-            'config.targetHostName': 'hostname2',   # Simulating the target hostname
-            'config.outputFile': 'C:\\\\tmp\\\\file.txt',  # Simulating the output file path
-            'data': 'testuser'  # Simulating the username to be analyzed
+            'config.clientId': 'dummy_clientId',
+            'config.clientSecret': 'dummy_clientSecret',
+            'config.targetHostName': 'hostname2',
+            'config.outputFile': 'C:\\\\tmp\\\\file.txt',
+            'data': 'testuser'
         }[x])
 
-        # Create a mock instance of the 'CrowdStrikeModule' to simulate interactions with the API
         mock_instance = MockCrowdStrikeModule.return_value
-
-        # Simulate an exception being raised during the 'runCloudScript' call
         mock_instance.runCloudScript.side_effect = Exception("API failure")
 
-        # Mock the 'unexpectedError' function to verify it gets called in case of an exception
         analyzer.unexpectedError = MagicMock()
-
-        # Set the 'data_type' to 'username' and run the analyzer
         analyzer.data_type = "username"
         analyzer.run()
 
-        # Verify that the 'unexpectedError' method was called once to handle the exception
         analyzer.unexpectedError.assert_called_once()
+
 
 if __name__ == '__main__':
     unittest.main()
