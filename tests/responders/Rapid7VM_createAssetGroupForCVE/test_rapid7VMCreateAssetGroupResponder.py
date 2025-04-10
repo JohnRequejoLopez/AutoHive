@@ -68,7 +68,7 @@ class TestRapid7Responder(unittest.TestCase):
     @patch('sys.stdin')
     def test_run_no_cve(self, mock_stdin, MockTheHive, MockVulnMgmt):
         import json
-
+    
         input_data = {
             "config": {
                 "userName": "dummy_userName",
@@ -85,12 +85,12 @@ class TestRapid7Responder(unittest.TestCase):
             "dataType": "ip",
             "_id": "observable123"
         }
-
+    
         mock_stdin.isatty.return_value = False
         mock_stdin.read.return_value = json.dumps(input_data)
-
+    
         responder = rapid7VMResponder()
-
+    
         responder.get_param = MagicMock(side_effect=lambda x, *_: {
             'config.userName': 'dummy_userName',
             'config.password': 'dummy_password',
@@ -105,14 +105,23 @@ class TestRapid7Responder(unittest.TestCase):
             "dataType": "ip",
             "_id": "observable123"
         }[x])
-
+    
+        # Mock TheHive instance
         mock_hive_instance = MockTheHive.return_value
-        mock_hive_instance.getCaseObservable.return_value = []
-
+        mock_hive_instance.getCaseObservable.return_value = []  # Simulating no CVE observable
+    
+        # Mock Rapid7 vulnerabilityManagement instance
+        mock_r7_instance = MockVulnMgmt.return_value
+    
+        # Mock the error method
         responder.error = MagicMock()
+    
+        # Run the responder logic
         responder.run()
-
+    
+        # Verify that error was called with the expected message
         responder.error.assert_called_once_with("No CVE observable type was found on this case.")
+
 
 if __name__ == '__main__':
     unittest.main()
