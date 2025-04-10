@@ -55,7 +55,8 @@ class rapid7VMResponder(Responder):
                         break
 
             if cve is None:
-                return self.error("No CVE observable type was found on this case.")
+                self.error("No CVE observable type was found on this case.")
+                return
 
             response = self.__r7Conn.createAssetGroup(groupName=groupName, cve=cve)
 
