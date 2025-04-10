@@ -26,7 +26,12 @@ class crowdstrikeAnalyzer(Analyzer):
                 stdout_output, stderr_output = self.__crwdConn.getFileContent(filePath=self.outputFile)
                 
                 if stdout_output:
-                    result= stdout_output
+                    try:
+                        parsed_output = json.loads(stdout_output)
+                        result = parsed_output.get("password_last_set", "Not found")
+                    except json.JSONDecodeError:
+                        result = f"Failed to parse output: {stdout_output}"
+                    
                 else:
                     result = "No content received from the file."
             
