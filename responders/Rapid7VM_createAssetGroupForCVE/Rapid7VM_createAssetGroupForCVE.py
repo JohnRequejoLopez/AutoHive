@@ -21,6 +21,10 @@ class rapid7VMResponder(Responder):
         from datetime import datetime
 
         return f"{datetime.utcnow().strftime('%Y/%m/%d - %H:%M')} UTC"
+    
+    def validateInput(self, input_data):
+        if 'dataType' not in input_data.get('data', {}):
+            self.error("Missing 'dataType' field in input data.")
 
     def run(self):
 
@@ -30,6 +34,8 @@ class rapid7VMResponder(Responder):
         try:
             self.__thehiveConn = TheHive(url=self.__thehiveInstance, api_key=self.__thehiveApiKey)
             self.__r7Conn = vulnerabilityManagement(url=self.url, username=self.userName, password=self.password)
+
+            self.validateInput()
 
             data = self.get_param('data', {})
 
