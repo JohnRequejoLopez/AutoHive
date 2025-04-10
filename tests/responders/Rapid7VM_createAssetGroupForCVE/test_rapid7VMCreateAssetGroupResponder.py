@@ -18,9 +18,11 @@ class TestRapid7Responder(unittest.TestCase):
                 "thehiveInstance": "https://thehive.local",
                 "thehiveApiKey": "dummy_apiKey"
             },
-            "data": "CVE-2025-TEST",
-            "dataType": "cve",
-            "_id": "observable123"
+            "data": {
+                "data": "CVE-2025-TEST",
+                "dataType": "cve",
+                "_id": "observable123"
+            }
         }
 
         mock_stdin.isatty.return_value = False
@@ -34,9 +36,11 @@ class TestRapid7Responder(unittest.TestCase):
             'config.instanceURL': 'https://rapid7.local',
             'config.thehiveInstance': 'https://thehive.local',
             'config.thehiveApiKey': 'dummy_apiKey',
-            'data': 'CVE-2025-TEST',
-            'dataType': 'cve',
-            '_id': 'observable123'
+            "data": {
+                "data": "CVE-2025-TEST",
+                "dataType": "cve",
+                "_id": "observable123"
+            }
         }[x])
 
         # Mocking TheHive instance
@@ -73,9 +77,7 @@ class TestRapid7Responder(unittest.TestCase):
                 "data": "123",
                 "dataType": "ip",
                 "_id": "observable123"
-            },
-            "dataType": "ip",
-            "_id": "observable123"
+            }
         }
 
         mock_stdin.isatty.return_value = False
@@ -93,9 +95,7 @@ class TestRapid7Responder(unittest.TestCase):
                 "data": "123",
                 "dataType": "ip",
                 "_id": "observable123"
-            },
-            'dataType': 'ip',
-            '_id': 'observable123'
+            }
         }[x])
 
         mock_hive_instance = MockTheHive.return_value
