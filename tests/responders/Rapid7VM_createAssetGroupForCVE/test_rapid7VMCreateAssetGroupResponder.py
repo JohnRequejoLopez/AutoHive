@@ -71,7 +71,8 @@ class TestRapid7Responder(unittest.TestCase):
             },
             "data": {
                 "data": "123",
-                "dataType": "ip"
+                "dataType": "ip",
+                "_id": "observable123"
             },
             "dataType": "ip",
             "_id": "observable123"
@@ -90,7 +91,8 @@ class TestRapid7Responder(unittest.TestCase):
             'config.thehiveApiKey': 'dummy_apiKey',
             "data": {
                 "data": "123",
-                "dataType": "ip"
+                "dataType": "ip",
+                "_id": "observable123"
             },
             'dataType': 'ip',
             '_id': 'observable123'
