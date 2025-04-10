@@ -1,4 +1,4 @@
-from varTypes import (
+from .varTypes import (
     APIResponse,
     CVEAssetsResponse,
     AssetGroupResponse,
