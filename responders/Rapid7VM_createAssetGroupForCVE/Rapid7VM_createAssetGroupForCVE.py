@@ -52,11 +52,10 @@ class rapid7VMResponder(Responder):
                     if observable.get('dataType') == 'cve':
                         cve = groupName = observable.get('data')
                         observableId = observable.get('_id')
-                else:
-                    self.error("No CVE observable type was found on this case.")
+                        break
 
             if not cve:
-                return self.error("No CVE observable type was found in the case.")
+                return self.error("No CVE observable type was found on this case.")
 
             response = self.__r7Conn.createAssetGroup(groupName=groupName, cve=cve)
 
