@@ -35,7 +35,7 @@ class rapid7VMResponder(Responder):
             self.__thehiveConn = TheHive(url=self.__thehiveInstance, api_key=self.__thehiveApiKey)
             self.__r7Conn = vulnerabilityManagement(url=self.url, username=self.userName, password=self.password)
 
-            self.validateInput()
+            self.validateInput(self._input)
 
             data = self.get_param('data', {})
 
