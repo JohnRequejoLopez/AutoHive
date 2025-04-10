@@ -15,7 +15,7 @@ class rapid7VMAnalyzer(Analyzer):
         self.__r7Conn = None
 
     def run(self):
-        from Rapid7 import vulnerabilityManagement
+        from .Rapid7 import vulnerabilityManagement
 
         try:
             if self.data_type == "cve":
