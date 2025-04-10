@@ -24,8 +24,8 @@ class rapid7VMResponder(Responder):
 
     def run(self):
 
-        from thehive import TheHive
-        from Rapid7 import vulnerabilityManagement
+        from .thehive import TheHive
+        from .Rapid7 import vulnerabilityManagement
 
         try:
             self.__thehiveConn = TheHive(url=self.__thehiveInstance, api_key=self.__thehiveApiKey)
