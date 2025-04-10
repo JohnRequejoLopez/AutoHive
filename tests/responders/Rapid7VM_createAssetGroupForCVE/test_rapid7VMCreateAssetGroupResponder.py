@@ -25,7 +25,6 @@ class TestRapid7Responder(unittest.TestCase):
             },
             "dataType": "cve",
             "_id": "observable123"
-            
         }
 
         mock_stdin.isatty.return_value = False
@@ -82,7 +81,9 @@ class TestRapid7Responder(unittest.TestCase):
                 "data": "123",
                 "dataType": "ip",
                 "_id": "observable123"
-            }
+            },
+            "dataType": ip",
+            "_id": "observable123"
         }
 
         mock_stdin.isatty.return_value = False
@@ -100,7 +101,9 @@ class TestRapid7Responder(unittest.TestCase):
                 "data": "123",
                 "dataType": "ip",
                 "_id": "observable123"
-            }
+            },
+            "dataType": "ip",
+            "_id": "observable123"
         }[x])
 
         mock_hive_instance = MockTheHive.return_value
